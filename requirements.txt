@@ -1,0 +1,10 @@
+Django
+fastapi
+uvicorn
+pandas
+plotly
+google-genai
+python-dotenv
+langgraph
+requests
+python-multipart
