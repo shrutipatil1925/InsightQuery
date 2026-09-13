@@ -1,0 +1,261 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Account - InsightQuery</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+<body class="auth-page">
+
+
+<div class="auth-container">
+
+
+    <!-- LEFT -->
+
+    <section class="auth-left">
+
+        <a href="/" class="auth-brand">
+
+            <div class="auth-logo">
+                IQ
+            </div>
+
+            <div>
+
+                <h2>
+                    InsightQuery
+                </h2>
+
+                <span>
+                    AI Data Analysis
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="auth-content">
+
+            <h1>
+                Understand your
+                <span>data better.</span>
+            </h1>
+
+            <p>
+                Create your InsightQuery account and explore
+                your datasets with natural language and
+                AI-powered analysis.
+            </p>
+
+
+            <div class="auth-feature-list">
+
+                <div class="auth-feature">
+
+                    <span class="auth-feature-icon">
+                        ✓
+                    </span>
+
+                    Upload and manage datasets
+
+                </div>
+
+
+                <div class="auth-feature">
+
+                    <span class="auth-feature-icon">
+                        ✓
+                    </span>
+
+                    Ask questions without writing SQL
+
+                </div>
+
+
+                <div class="auth-feature">
+
+                    <span class="auth-feature-icon">
+                        ✓
+                    </span>
+
+                    Get charts and AI insights
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT -->
+
+    <section class="auth-right">
+
+        <div class="auth-form-card register-form-card">
+
+
+            <div class="auth-mobile-logo">
+                IQ
+            </div>
+
+
+            <div class="auth-form-header">
+
+                <h1>
+                    Create your account
+                </h1>
+
+                <p>
+                    Start exploring your data with InsightQuery
+                </p>
+
+            </div>
+
+
+            {% if error %}
+
+            <div class="auth-error">
+
+                <span>!</span>
+
+                {{ error }}
+
+            </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="auth-form-group">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Choose a username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-form-group">
+
+                    <label>
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="confirm_password"
+                        placeholder="Confirm your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-submit-btn"
+                >
+                    Create Account →
+                </button>
+
+            </form>
+
+
+            <div class="auth-divider">
+
+                <span>
+                    or
+                </span>
+
+            </div>
+
+
+            <p class="auth-bottom">
+
+                Already have an account?
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+            </p>
+
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+</body>
+
+</html>

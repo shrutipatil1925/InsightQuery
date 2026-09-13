@@ -1,0 +1,221 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login - InsightQuery</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+<body class="auth-page">
+
+
+<div class="auth-container">
+
+
+    <!-- LEFT SIDE -->
+
+    <section class="auth-left">
+
+        <a href="/" class="auth-brand">
+
+            <div class="auth-logo">
+                IQ
+            </div>
+
+            <div>
+
+                <h2>InsightQuery</h2>
+
+                <span>
+                    AI Data Analysis
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="auth-content">
+
+            <h1>
+                Turn your data
+                <span>into insights.</span>
+            </h1>
+
+            <p>
+                Analyze your datasets using natural language,
+                generate SQL automatically and understand your
+                data with AI-powered insights.
+            </p>
+
+
+            <div class="auth-feature-list">
+
+                <div class="auth-feature">
+
+                    <span class="auth-feature-icon">
+                        ✓
+                    </span>
+
+                    Ask questions using natural language
+
+                </div>
+
+
+                <div class="auth-feature">
+
+                    <span class="auth-feature-icon">
+                        ✓
+                    </span>
+
+                    Generate SQL automatically
+
+                </div>
+
+
+                <div class="auth-feature">
+
+                    <span class="auth-feature-icon">
+                        ✓
+                    </span>
+
+                    Visualize your results
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+
+    <section class="auth-right">
+
+        <div class="auth-form-card">
+
+
+            <div class="auth-mobile-logo">
+                IQ
+            </div>
+
+
+            <div class="auth-form-header">
+
+                <h1>
+                    Welcome back
+                </h1>
+
+                <p>
+                    Login to continue to InsightQuery
+                </p>
+
+            </div>
+
+
+            {% if error %}
+
+            <div class="auth-error">
+
+                <span>!</span>
+
+                {{ error }}
+
+            </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="auth-form-group">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="auth-form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-submit-btn"
+                >
+                    Login →
+                </button>
+
+            </form>
+
+
+            <div class="auth-divider">
+                <span>or</span>
+            </div>
+
+
+            <p class="auth-bottom">
+
+                Don't have an account?
+
+                <a href="{% url 'register' %}">
+                    Create Account
+                </a>
+
+            </p>
+
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+</body>
+
+</html>

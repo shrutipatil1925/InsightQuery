@@ -1,0 +1,562 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - InsightQuery</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="dashboard-sidebar-brand">
+
+            <div class="dashboard-sidebar-logo">
+                IQ
+            </div>
+
+            <div>
+                <strong>InsightQuery</strong>
+                <small>AI Data Analysis</small>
+            </div>
+
+        </div>
+
+
+        <nav class="dashboard-sidebar-nav">
+
+            <a href="{% url 'chat' %}"
+               class="dashboard-nav-link active">
+
+                <span class="dashboard-nav-icon">▣</span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="{% url 'database' %}"
+               class="dashboard-nav-link">
+
+                <span class="dashboard-nav-icon">▤</span>
+
+                <span>Datasets</span>
+
+            </a>
+
+
+            <a href="{% url 'history' %}"
+               class="dashboard-nav-link">
+
+                <span class="dashboard-nav-icon">◷</span>
+
+                <span>History</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="dashboard-sidebar-bottom">
+
+            <a href="{% url 'logout' %}"
+               class="dashboard-nav-link">
+
+                <span class="dashboard-nav-icon">↪</span>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="dashboard-main">
+
+
+        <!-- TOPBAR -->
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>Data Analysis Dashboard</h1>
+
+                <p>
+                    Ask questions about your dataset and get AI-powered insights.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <div class="dashboard-content">
+
+
+            <!-- ================= WELCOME ================= -->
+
+            <section class="dashboard-welcome">
+
+                <span class="dashboard-welcome-badge">
+                    AI-Powered Data Analysis
+                </span>
+
+                <h2>
+                    Welcome to <span>InsightQuery</span>
+                </h2>
+
+                <p>
+                    Upload your dataset, ask questions in natural language,
+                    and let InsightQuery generate SQL queries, visualizations,
+                    and meaningful insights.
+                </p>
+
+            </section>
+
+
+            <!-- ================= ERROR ================= -->
+
+            {% if error %}
+
+            <div class="dashboard-error">
+
+                <div class="dashboard-error-icon">
+                    ✕
+                </div>
+
+                <div>
+
+                    <h3>Something went wrong</h3>
+
+                    <p>{{ error }}</p>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- ================= UPLOAD DATASET ================= -->
+
+            <section class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <h2>Upload Dataset</h2>
+
+                        <p>
+                            Upload a CSV file to start analyzing your data.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form method="POST"
+                      enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <div class="dataset-upload-area">
+
+                        <div class="dataset-upload-icon">
+                            ↑
+                        </div>
+
+                        <h3>
+                            Upload your CSV dataset
+                        </h3>
+
+                        <p>
+                            Select a CSV file from your computer.
+                        </p>
+
+                        <input
+                            type="file"
+                            name="file"
+                            accept=".csv"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="dataset-upload-action">
+
+                        <button
+                            type="submit"
+                            class="primary-btn">
+
+                            Upload Dataset →
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- ================= UPLOAD SUCCESS ================= -->
+
+            {% if upload_success %}
+
+            <div class="dashboard-success">
+
+                <div class="dashboard-success-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Dataset uploaded successfully
+                    </h3>
+
+                    <p>
+                        {{ filename }}
+                        · {{ rows }} rows
+                        · {{ columns }} columns
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- ================= ASK YOUR DATA ================= -->
+
+            <section class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <h2>Ask Your Data</h2>
+
+                        <p>
+                            Ask a question about your uploaded dataset.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <div class="dashboard-form-group">
+
+                        <label for="database_name">
+                            Dataset
+                        </label>
+
+                        <input
+                            type="text"
+                            id="database_name"
+                            name="database_name"
+                            value="{{ database_name|default:'Titanic' }}"
+                            placeholder="Enter dataset name"
+                            required
+                        >
+
+                        <small>
+                            Example: Titanic
+                        </small>
+
+                    </div>
+
+
+                    <div class="dashboard-form-group">
+
+                        <label for="question">
+                            Your Question
+                        </label>
+
+                        <textarea
+                            id="question"
+                            name="question"
+                            rows="4"
+                            placeholder="Example: What is the survival count for each passenger class?"
+                            required
+                        >{{ question|default:'' }}</textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn">
+
+                        Analyze Data →
+
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- ================= SQL RESULT ================= -->
+
+            {% if sql_query %}
+
+            <section class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <h2>Generated SQL</h2>
+
+                        <p>
+                            SQL query generated by the AI model.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sql-result-box">
+
+                    <pre>{{ sql_query }}</pre>
+
+                </div>
+
+            </section>
+
+            {% endif %}
+
+
+            <!-- ================= QUERY RESULT ================= -->
+
+            {% if query_result %}
+
+            <section class="dashboard-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <h2>Query Result</h2>
+
+                        <p>
+                            Result returned from your dataset.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="result-table-wrapper">
+
+                    <table class="result-table">
+
+                        <thead>
+
+                            <tr>
+
+                                {% for key in query_result.0.keys %}
+
+                                <th>
+                                    {{ key }}
+                                </th>
+
+                                {% endfor %}
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for row in query_result %}
+
+                            <tr>
+
+                                {% for value in row.values %}
+
+                                <td>
+                                    {{ value }}
+                                </td>
+
+                                {% endfor %}
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+            {% endif %}
+
+
+            <!-- ================= CHART ================= -->
+
+            {% if chart %}
+
+            <section class="dashboard-card chart-card">
+
+                <div class="dashboard-card-header">
+
+                    <div>
+
+                        <h2>Visualization</h2>
+
+                        <p>
+                            Visual representation of your query result.
+                        </p>
+
+                    </div>
+
+
+                    {% if chart_type %}
+
+                    <span class="chart-type-badge">
+                        {{ chart_type }}
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div
+                    id="chart"
+                    class="chart-container">
+                </div>
+
+            </section>
+
+
+            {{ chart|json_script:"chart-data" }}
+
+            <script>
+
+                const chartData = JSON.parse(
+                    document.getElementById("chart-data").textContent
+                );
+
+                Plotly.newPlot(
+                    "chart",
+                    chartData.data,
+                    chartData.layout,
+                    {
+                        responsive: true
+                    }
+                );
+
+            </script>
+
+            {% endif %}
+
+
+            <!-- ================= AI INSIGHT ================= -->
+
+            {% if insight %}
+
+            <section class="ai-insight-card">
+
+                <div class="ai-insight-header">
+
+                    <div class="ai-insight-icon">
+                        ✦
+                    </div>
+
+                    <div>
+
+                        <h2>AI Insight</h2>
+
+                        <p>
+                            Summary generated from your data.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ai-insight-content">
+
+                    <p>
+                        {{ insight }}
+                    </p>
+
+                </div>
+
+            </section>
+
+            {% endif %}
+
+
+            <!-- ================= EMPTY STATE ================= -->
+
+            {% if not sql_query and not upload_success %}
+
+            <section class="getting-started">
+
+                <div class="getting-started-icon">
+                    ✦
+                </div>
+
+                <h2>
+                    Ready to explore your data?
+                </h2>
+
+                <p>
+                    Upload a CSV dataset above and start asking questions.
+                </p>
+
+            </section>
+
+            {% endif %}
+
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

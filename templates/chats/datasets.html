@@ -1,0 +1,290 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Datasets - InsightQuery</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+
+        <a
+            href="{% url 'chat' %}"
+            class="dashboard-sidebar-brand"
+        >
+
+            <div class="dashboard-sidebar-logo">
+                IQ
+            </div>
+
+            <div>
+
+                <strong>
+                    InsightQuery
+                </strong>
+
+                <small>
+                    AI Data Analysis
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <nav class="dashboard-sidebar-nav">
+
+
+            <a
+                href="{% url 'chat' %}"
+                class="dashboard-nav-link"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ⌂
+                </span>
+
+                Dashboard
+
+            </a>
+
+
+            <a
+                href="{% url 'database' %}"
+                class="dashboard-nav-link active"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ▤
+                </span>
+
+                Datasets
+
+            </a>
+
+
+            <a
+                href="{% url 'history' %}"
+                class="dashboard-nav-link"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ◷
+                </span>
+
+                History
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="dashboard-sidebar-bottom">
+
+            <a
+                href="{% url 'logout' %}"
+                class="dashboard-nav-link"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ↪
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Datasets
+                </h1>
+
+                <p>
+                    Manage your uploaded datasets.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <div class="dashboard-content">
+
+
+            <div class="page-header">
+
+                <div>
+
+                    <h2>
+                        Your Datasets
+                    </h2>
+
+                    <p>
+                        Datasets uploaded to your InsightQuery account.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{% url 'chat' %}"
+                    class="primary-btn"
+                >
+                    Upload Dataset →
+                </a>
+
+            </div>
+
+
+            {% if datasets %}
+
+
+            <div class="data-list">
+
+
+                {% for dataset in datasets %}
+
+
+                <div class="data-list-item">
+
+
+                    <div class="data-list-left">
+
+
+                        <div class="data-list-icon">
+                            📊
+                        </div>
+
+
+                        <div class="data-list-info">
+
+                            <h3>
+                                {{ dataset.name }}
+                            </h3>
+
+                            <p>
+
+                                {{ dataset.filename }}
+
+                                ·
+
+                                {{ dataset.rows }} rows
+
+                                ·
+
+                                {{ dataset.columns }} columns
+
+                                ·
+
+                                {{ dataset.uploaded_at|date:"d M Y, h:i A" }}
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <span class="data-list-status">
+                        Ready
+                    </span>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <div class="page-empty-state">
+
+
+                <div class="page-empty-icon">
+                    📊
+                </div>
+
+
+                <h3>
+                    No datasets yet
+                </h3>
+
+
+                <p>
+                    Upload your first CSV dataset to start
+                    analyzing your data.
+                </p>
+
+
+                <a
+                    href="{% url 'chat' %}"
+                    class="primary-btn"
+                >
+                    Upload Dataset →
+                </a>
+
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>
