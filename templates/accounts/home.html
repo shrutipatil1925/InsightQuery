@@ -1,0 +1,457 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>InsightQuery - AI Data Analysis</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+
+<body class="home-page">
+
+
+<!-- NAVBAR -->
+
+<nav class="home-navbar">
+
+
+    <a href="/" class="home-brand">
+
+        <div class="home-brand-icon">
+            IQ
+        </div>
+
+        <div class="home-brand-text">
+
+            <strong>
+                InsightQuery
+            </strong>
+
+            <span>
+                AI Data Analysis
+            </span>
+
+        </div>
+
+    </a>
+
+
+    <div class="home-nav-links">
+
+        <a href="#features">
+            Features
+        </a>
+
+        <a
+            href="{% url 'login' %}"
+            class="home-nav-login"
+        >
+            Login
+        </a>
+
+        <a
+            href="{% url 'register' %}"
+            class="home-nav-register"
+        >
+            Get Started
+        </a>
+
+    </div>
+
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="home-hero">
+
+
+    <div class="home-hero-content">
+
+
+        <span class="home-badge">
+            AI-Powered Data Analysis
+        </span>
+
+
+        <h1>
+
+            Turn your data
+            <span>into insights.</span>
+
+        </h1>
+
+
+        <p>
+
+            Upload your datasets, ask questions in natural language,
+            generate SQL automatically and understand your data
+            with AI-powered analysis.
+
+        </p>
+
+
+        <div class="home-hero-buttons">
+
+            <a
+                href="{% url 'register' %}"
+                class="primary-btn"
+            >
+                Start Analyzing →
+            </a>
+
+
+            <a
+                href="{% url 'login' %}"
+                class="secondary-btn"
+            >
+                Login
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- DASHBOARD PREVIEW -->
+
+    <div class="home-preview-wrapper">
+
+
+        <div class="home-preview">
+
+
+            <div class="home-preview-top">
+
+                <div class="home-preview-dots">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+                InsightQuery Dashboard
+
+            </div>
+
+
+            <div class="home-preview-body">
+
+
+                <div class="home-preview-title">
+                    Data Analysis
+                </div>
+
+
+                <div class="home-preview-question">
+
+                    What is the survival count for each passenger class?
+
+                </div>
+
+
+                <div class="home-preview-chart">
+
+                    <div class="home-chart-bar home-chart-bar-one"></div>
+
+                    <div class="home-chart-bar home-chart-bar-two"></div>
+
+                    <div class="home-chart-bar home-chart-bar-three"></div>
+
+                </div>
+
+
+                <div class="home-preview-insight">
+
+                    <div class="home-preview-insight-icon">
+                        ✦
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            AI Insight
+                        </strong>
+
+                        <p>
+                            The second passenger class has a
+                            lower survival count compared with
+                            the other classes.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section
+    class="home-features"
+    id="features"
+>
+
+
+    <div class="home-section-heading">
+
+        <span>
+            FEATURES
+        </span>
+
+        <h2>
+            Everything you need to understand your data
+        </h2>
+
+        <p>
+            InsightQuery combines SQL, visualization and AI
+            to make data analysis easier.
+        </p>
+
+    </div>
+
+
+    <div class="home-feature-grid">
+
+
+        <div class="home-feature-card">
+
+            <div class="home-feature-icon">
+                ↑
+            </div>
+
+            <h3>
+                Upload Dataset
+            </h3>
+
+            <p>
+                Upload CSV datasets and prepare them
+                for analysis.
+            </p>
+
+        </div>
+
+
+        <div class="home-feature-card">
+
+            <div class="home-feature-icon">
+                ?
+            </div>
+
+            <h3>
+                Ask Questions
+            </h3>
+
+            <p>
+                Ask questions about your data using
+                natural language.
+            </p>
+
+        </div>
+
+
+        <div class="home-feature-card">
+
+            <div class="home-feature-icon">
+                ◫
+            </div>
+
+            <h3>
+                Visualize Data
+            </h3>
+
+            <p>
+                Automatically generate useful visualizations
+                from query results.
+            </p>
+
+        </div>
+
+
+        <div class="home-feature-card">
+
+            <div class="home-feature-icon">
+                ✦
+            </div>
+
+            <h3>
+                AI Insights
+            </h3>
+
+            <p>
+                Get simple explanations and observations
+                from your data.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="home-how">
+
+
+    <div class="home-section-heading">
+
+        <span>
+            HOW IT WORKS
+        </span>
+
+        <h2>
+            Analyze your data in four simple steps
+        </h2>
+
+    </div>
+
+
+    <div class="home-step-grid">
+
+
+        <div class="home-step">
+
+            <div class="home-step-number">
+                01
+            </div>
+
+            <h3>
+                Upload
+            </h3>
+
+            <p>
+                Upload your CSV dataset.
+            </p>
+
+        </div>
+
+
+        <div class="home-step">
+
+            <div class="home-step-number">
+                02
+            </div>
+
+            <h3>
+                Ask
+            </h3>
+
+            <p>
+                Ask a question in natural language.
+            </p>
+
+        </div>
+
+
+        <div class="home-step">
+
+            <div class="home-step-number">
+                03
+            </div>
+
+            <h3>
+                Analyze
+            </h3>
+
+            <p>
+                InsightQuery generates and executes SQL.
+            </p>
+
+        </div>
+
+
+        <div class="home-step">
+
+            <div class="home-step-number">
+                04
+            </div>
+
+            <h3>
+                Understand
+            </h3>
+
+            <p>
+                View results, charts and AI insights.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="home-cta">
+
+    <h2>
+        Ready to explore your data?
+    </h2>
+
+    <p>
+        Start using InsightQuery to turn your datasets into insights.
+    </p>
+
+    <a
+        href="{% url 'register' %}"
+        class="primary-btn"
+    >
+        Create Your Account →
+    </a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="home-footer">
+
+    <strong>
+        InsightQuery
+    </strong>
+
+    <span>
+        AI-Powered Data Analysis Platform
+    </span>
+
+</footer>
+
+
+</body>
+
+</html>

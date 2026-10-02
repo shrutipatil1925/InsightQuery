@@ -1,0 +1,278 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Database - InsightQuery</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+
+        <a
+            href="{% url 'chat' %}"
+            class="dashboard-sidebar-brand"
+        >
+
+            <div class="dashboard-sidebar-logo">
+                IQ
+            </div>
+
+            <div>
+
+                <strong>
+                    InsightQuery
+                </strong>
+
+                <small>
+                    AI Data Analysis
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <nav class="dashboard-sidebar-nav">
+
+
+            <a
+                href="{% url 'chat' %}"
+                class="dashboard-nav-link"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ⌂
+                </span>
+
+                Dashboard
+
+            </a>
+
+
+            <a
+                href="{% url 'database' %}"
+                class="dashboard-nav-link active"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ▤
+                </span>
+
+                Datasets
+
+            </a>
+
+
+            <a
+                href="{% url 'history' %}"
+                class="dashboard-nav-link"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ◷
+                </span>
+
+                History
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="dashboard-sidebar-bottom">
+
+            <a
+                href="{% url 'logout' %}"
+                class="dashboard-nav-link"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ↪
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Database
+                </h1>
+
+                <p>
+                    View databases created from your datasets.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <div class="dashboard-content">
+
+
+            <div class="page-header">
+
+                <div>
+
+                    <h2>
+                        Your Databases
+                    </h2>
+
+                    <p>
+                        SQLite databases generated from uploaded CSV files.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{% url 'chat' %}"
+                    class="primary-btn"
+                >
+                    Upload Dataset →
+                </a>
+
+            </div>
+
+
+            {% if databases %}
+
+
+            <div class="data-list">
+
+
+                {% for database in databases %}
+
+
+                <div class="data-list-item">
+
+
+                    <div class="data-list-left">
+
+
+                        <div class="data-list-icon">
+                            🗄
+                        </div>
+
+
+                        <div class="data-list-info">
+
+                            <h3>
+                                {{ database.name }}
+                            </h3>
+
+                            <p>
+                                {{ database.rows }} rows
+                                ·
+                                {{ database.columns }} columns
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <span class="data-list-status">
+                        Available
+                    </span>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <div class="page-empty-state">
+
+
+                <div class="page-empty-icon">
+                    🗄
+                </div>
+
+
+                <h3>
+                    No databases yet
+                </h3>
+
+
+                <p>
+                    Upload a CSV dataset and InsightQuery
+                    will create a database for analysis.
+                </p>
+
+
+                <a
+                    href="{% url 'chat' %}"
+                    class="primary-btn"
+                >
+                    Upload Dataset →
+                </a>
+
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>

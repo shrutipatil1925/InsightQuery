@@ -1,0 +1,304 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>History - InsightQuery</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+
+        <a
+            href="{% url 'chat' %}"
+            class="dashboard-sidebar-brand"
+        >
+
+            <div class="dashboard-sidebar-logo">
+                IQ
+            </div>
+
+            <div>
+
+                <strong>
+                    InsightQuery
+                </strong>
+
+                <small>
+                    AI Data Analysis
+                </small>
+
+            </div>
+
+        </a>
+
+
+        <nav class="dashboard-sidebar-nav">
+
+
+            <a
+                href="{% url 'chat' %}"
+                class="dashboard-nav-link"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ⌂
+                </span>
+
+                Dashboard
+
+            </a>
+
+
+            <a
+                href="{% url 'database' %}"
+                class="dashboard-nav-link"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ▤
+                </span>
+
+                Datasets
+
+            </a>
+
+
+            <a
+                href="{% url 'history' %}"
+                class="dashboard-nav-link active"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ◷
+                </span>
+
+                History
+
+            </a>
+
+
+        </nav>
+
+
+        <div class="dashboard-sidebar-bottom">
+
+            <a
+                href="{% url 'logout' %}"
+                class="dashboard-nav-link"
+            >
+
+                <span class="dashboard-nav-icon">
+                    ↪
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+
+        <header class="dashboard-topbar">
+
+            <div>
+
+                <h1>
+                    Analysis History
+                </h1>
+
+                <p>
+                    View your previous questions and analyses.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <div class="dashboard-content">
+
+
+            <div class="page-header">
+
+                <div>
+
+                    <h2>
+                        Your Analysis History
+                    </h2>
+
+                    <p>
+                        Previous questions asked through InsightQuery.
+                    </p>
+
+                </div>
+
+
+                {% if history %}
+
+                <span class="history-count-badge">
+                    {{ history|length }} Analyses
+                </span>
+
+                {% endif %}
+
+            </div>
+
+
+            {% if history %}
+
+
+            <div class="history-list">
+
+
+                {% for item in history %}
+
+
+                <div class="history-item">
+
+
+                    <div class="history-item-left">
+
+
+                        <div class="history-item-icon">
+                            ✦
+                        </div>
+
+
+                        <div class="history-item-info">
+
+                            <h3>
+                                {{ item.question }}
+                            </h3>
+
+
+                            <p>
+
+                                📊 {{ item.dataset_name }}
+
+                                {% if item.chart_type %}
+
+                                · {{ item.chart_type|title }}
+
+                                {% endif %}
+
+                                ·
+
+                                {{ item.created_at|date:"d M Y, h:i A" }}
+
+                            </p>
+
+
+                            {% if item.sql_query %}
+
+                            <p style="margin-top: 6px;">
+
+                                SQL generated successfully
+
+                            </p>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="history-item-arrow">
+                        →
+                    </div>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <div class="page-empty-state">
+
+
+                <div class="page-empty-icon">
+                    ◷
+                </div>
+
+
+                <h3>
+                    No analysis history yet
+                </h3>
+
+
+                <p>
+
+                    Once you ask questions about your datasets,
+                    your previous analyses will appear here.
+
+                </p>
+
+
+                <a
+                    href="{% url 'chat' %}"
+                    class="primary-btn"
+                >
+                    Start Analyzing →
+                </a>
+
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>
